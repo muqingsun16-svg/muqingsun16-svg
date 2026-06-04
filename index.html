@@ -1,141 +1,401 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evelyn | 作品集</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evelyn · Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --lavender: #E8E0F5;
+      --lavender-mid: #B8A4D8;
+      --purple: #7C5CBF;
+      --blue-soft: #BCD4EE;
+      --blue: #4A7FB5;
+      --mint: #B6DDD1;
+      --mint-dark: #2E8B72;
+      --peach: #F2D9C8;
+      --peach-dark: #C4714A;
+      --yellow: #F5E6B0;
+      --yellow-dark: #8A6E1A;
+      --rose: #F5C8D2;
+      --rose-dark: #B03055;
+      --text: #2D2438;
+      --text-mid: #5A5070;
+      --text-light: #8E87A0;
+      --bg: #FAF8FF;
+      --white: #FFFFFF;
+      --radius: 18px;
+      --radius-sm: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #E3F2FD 0%, #F3E5F5 50%, #E8F5E9 100%);
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: 80px 24px 60px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-blobs {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    }
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(48px);
+      opacity: 0.55;
+    }
+    .blob-1 { width: 340px; height: 340px; background: var(--lavender); top: -80px; left: -80px; }
+    .blob-2 { width: 280px; height: 280px; background: var(--blue-soft); top: 30px; right: -60px; }
+    .blob-3 { width: 200px; height: 200px; background: var(--mint); bottom: -40px; left: 40%; }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+
+    .face-icon {
+      width: 88px; height: 88px; margin: 0 auto 24px;
+      background: var(--blue-soft);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px;
+      box-shadow: 0 8px 32px rgba(74,127,181,0.18);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 8vw, 3.6rem);
+      color: var(--text);
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    h1 em { font-style: italic; color: var(--purple); }
+
+    .subtitle {
+      margin-top: 12px;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      margin-top: 28px;
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+    .tagline span { color: var(--purple); font-style: normal; }
+
+    .hero-cta {
+      margin-top: 36px;
+      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 26px;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--purple);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(124,92,191,0.3);
+    }
+    .btn-primary:hover { box-shadow: 0 10px 28px rgba(124,92,191,0.4); }
+    .btn-outline {
+      background: var(--white);
+      color: var(--purple);
+      border: 1.5px solid var(--lavender-mid);
+    }
+    .btn-outline:hover { border-color: var(--purple); background: var(--lavender); }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 60px 24px; max-width: 780px; margin: 0 auto; }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--lavender-mid), transparent);
+    }
+
+    /* ── EDU CARDS ── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .edu-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      border: 1px solid var(--lavender);
+      position: relative;
+      overflow: hidden;
+    }
+    .edu-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+    .edu-card.master::before { background: linear-gradient(90deg, var(--purple), var(--lavender-mid)); }
+    .edu-card.bachelor::before { background: linear-gradient(90deg, var(--mint-dark), var(--mint)); }
+    .edu-card-label { font-size: 0.78rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-light); margin-bottom: 6px; }
+    .edu-card-school { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text); margin-bottom: 4px; }
+    .edu-card-major { font-size: 0.9rem; color: var(--text-mid); }
+    .edu-card-en { font-size: 0.82rem; color: var(--text-light); font-style: italic; margin-top: 2px; }
+
+    /* ── EXPERIENCE PILLS ── */
+    .exp-row {
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .pill {
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: transform 0.15s;
+    }
+    .pill:hover { transform: translateY(-2px); }
+    .pill-purple { background: var(--lavender); color: var(--purple); border-color: var(--lavender-mid); }
+    .pill-green  { background: var(--mint);    color: var(--mint-dark); border-color: #90C9B8; }
+    .pill-blue   { background: var(--blue-soft); color: var(--blue); border-color: #8AAFD0; }
+    .pill-yellow { background: var(--yellow); color: var(--yellow-dark); border-color: #D4C070; }
+
+    /* ── WORKS ── */
+    .works-grid { display: grid; gap: 20px; }
+
+    .work-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--lavender);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 16px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .work-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(124,92,191,0.1);
+    }
+    .work-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 12px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    .tag-game   { background: var(--lavender); color: var(--purple); }
+    .tag-design { background: var(--mint);  color: var(--mint-dark); }
+    .tag-gtm    { background: var(--peach); color: var(--peach-dark); }
+    .tag-soon   { background: var(--rose);  color: var(--rose-dark); }
+
+    .work-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--text); margin-bottom: 8px; }
+    .work-desc  { font-size: 0.9rem; color: var(--text-mid); line-height: 1.65; }
+    .work-desc-en { font-size: 0.85rem; color: var(--text-light); font-style: italic; line-height: 1.6; margin-top: 6px; }
+
+    .work-link {
+      flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 42px; height: 42px;
+      background: var(--lavender);
+      border-radius: 50%;
+      color: var(--purple);
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .work-link:hover { background: var(--purple); color: #fff; transform: scale(1.1); }
+    .work-link.soon { background: var(--rose); color: var(--rose-dark); cursor: default; pointer-events: none; }
+
+    /* ── QUOTE ── */
+    .quote-section {
+      text-align: center;
+      padding: 64px 24px;
+      background: linear-gradient(160deg, var(--lavender) 0%, var(--blue-soft) 100%);
+      margin-top: 20px;
+    }
+    .quote-text {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 4vw, 1.7rem);
+      color: var(--text);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .quote-en {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 30px 24px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 500px) {
+      .work-card { grid-template-columns: 1fr; }
+      .work-link { width: 38px; height: 38px; font-size: 1rem; }
     }
   </style>
 </head>
 <body>
-<div style="max-width: 900px; margin: 0 auto; padding: 40px 20px;">
 
-  <!-- 头部 -->
-  <div style="text-align: center; margin-bottom: 25px;">
-    <h1 style="color: #5D6D7E; font-size: 2.8em; margin-bottom: 5px;">Evelyn (XX)</h1>
-    <p style="color: #5499C7; font-size: 1.2em; font-weight: 500;">Growth Ops / Product Ops / GTM</p>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
   </div>
-
-  <!-- 核心主张 -->
-  <div style="background-color: rgba(255,255,255,0.75); border-radius: 20px; padding: 25px; margin: 20px auto; max-width: 750px; text-align: center; border: 1px solid rgba(255,255,255,0.9); box-shadow: 0 8px 32px rgba(0,0,0,0.05);">
-    <figure style="margin: 0 0 15px;" role="img" aria-label="温暖插画">
-      <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="45" fill="#AED6F1" opacity="0.8"/>
-        <circle cx="35" cy="40" r="5" fill="#5D6D7E"/>
-        <circle cx="65" cy="40" r="5" fill="#5D6D7E"/>
-        <path d="M 30 70 Q 50 85 70 70" stroke="#5D6D7E" stroke-width="5" fill="none" stroke-linecap="round"/>
-        <line x1="50" y1="5" x2="50" y2="20" stroke="#F9E79F" stroke-width="4" stroke-linecap="round"/>
-        <line x1="85" y1="30" x2="75" y2="40" stroke="#F9E79F" stroke-width="4" stroke-linecap="round"/>
-        <line x1="15" y1="30" x2="25" y2="40" stroke="#F9E79F" stroke-width="4" stroke-linecap="round"/>
-      </svg>
-    </figure>
-    <p style="font-size: 1.8em; color: #34495E; line-height: 1.5; margin: 0; font-weight: 600;">
-      “努力去做更多<br><strong style="font-size: 1.1em;">温暖且有力量的事情</strong>”
+  <div class="hero-inner">
+    <div class="face-icon" aria-hidden="true">☀️</div>
+    <h1>Evelyn <em>(XX)</em></h1>
+    <p class="subtitle">Growth Ops · Product Ops · GTM</p>
+    <p class="tagline">
+      努力去做更多<span>温暖且有力量</span>的事情<br>
+      <small style="font-size:0.75em; letter-spacing:1px;">Striving to create warmth and impact.</small>
     </p>
-    <p style="margin-top: 12px; color: #7F8C8D; font-size: 1.1em; font-family: Georgia, serif; font-style: italic;">Striving to create warmth and impact.</p>
-  </div>
-
-  <!-- 教育背景 -->
-  <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
-    <h2 style="color: #5499C7; border-bottom: 2px solid #D2B4DE; padding-bottom: 10px;">🎓 教育背景 / Education</h2>
-    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
-      <div style="flex: 1 1 260px; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <h3 style="color: #8E44AD; margin-top: 0;">📍 硕士 | 上海交通大学</h3>
-        <p style="color: #5D6D7E; margin: 0;"><strong>文化产业管理</strong><br>Culture Industry Management</p>
-      </div>
-      <div style="flex: 1 1 260px; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <h3 style="color: #17A589; margin-top: 0;">📍 本科 | 华南理工大学</h3>
-        <p style="color: #5D6D7E; margin: 0;"><strong>会展经济与管理</strong><br>Exhibition Economy and Management</p>
-      </div>
+    <div class="hero-cta">
+      <a href="https://muqingsun16-svg.github.io" target="_blank" class="btn btn-primary">✨ 进入完整作品集</a>
+      <a href="#works" class="btn btn-outline">↓ 看精选作品</a>
     </div>
   </div>
+</section>
 
-  <!-- 实习经历 -->
-  <div style="max-width: 850px; margin: 40px auto; padding: 0 20px;">
-    <h2 style="color: #5499C7; border-bottom: 2px solid #D2B4DE; padding-bottom: 10px;">💼 实习经历 / Experience</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px;">
-      <div style="background: #E8DAEF; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-        <strong style="color: #6C3483;">GAC Toyota</strong><br><small style="color: #5D6D7E;">广汽丰田总部</small>
-      </div>
-      <div style="background: #D4EFDF; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-        <strong style="color: #196F3D;">Henan TV</strong><br><small style="color: #5D6D7E;">河南广播电视台</small>
-      </div>
-      <div style="background: #D6EAF8; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-        <strong style="color: #1A5276;">Shanghai AI Lab</strong><br><small style="color: #5D6D7E;">上海人工智能实验室</small>
-      </div>
-      <div style="background: #FCF3CF; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-        <strong style="color: #9A7D0A;">Trip.com</strong><br><small style="color: #5D6D7E;">携程集团</small>
-      </div>
+<!-- EDUCATION -->
+<div class="section">
+  <h2 class="section-title">🎓 教育背景</h2>
+  <div class="edu-grid">
+    <div class="edu-card master">
+      <div class="edu-card-label">硕士 · Master</div>
+      <div class="edu-card-school">上海交通大学</div>
+      <div class="edu-card-major">文化产业管理</div>
+      <div class="edu-card-en">Culture Industry Management · SJTU</div>
     </div>
-    <p style="text-align: right; margin-top: 10px; font-size: 0.9em; color: #85929E;">更多经历详见简历 / See resume for details</p>
-  </div>
-
-  <!-- 精选作品 -->
-  <div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
-    <h2 style="color: #5499C7; border-bottom: 2px solid #D2B4DE; padding-bottom: 10px;">✨ 精选作品 / Selected Works</h2>
-
-    <div style="background: white; border-radius: 20px; padding: 25px; margin-top: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.07);">
-      <h3 style="color: #AF7AC5; margin-top: 0;">🎮 罕见病科普互动游戏</h3>
-      <p style="color: #5D6D7E; line-height: 1.6;">我把冷知识藏进游戏，像悄悄递给你一张小纸条，等你打开时，会心一笑。希望用这种轻松的方式，让罕见被看见。</p>
-      <p style="color: #7F8C8D; line-height: 1.6; font-size: 0.95em; font-family: Georgia, serif; font-style: italic;">I hid cold facts inside a game, like a little note passed just to you. Hope you smile when you find it — and see the unseen.</p>
-      <a href="https://yuanbao.tencent.com/sc/KhnwCTYBKPQopiU" target="_blank" style="display: inline-block; background: #AED6F1; color: #1A5276; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; margin-top: 10px;">🕹️ 来玩一下 / Play Now</a>
-    </div>
-
-    <div style="background: white; border-radius: 20px; padding: 25px; margin-top: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.07);">
-      <h3 style="color: #48C9B0; margin-top: 0;">🤖 内部志愿者积分激励系统 UI</h3>
-      <p style="color: #5D6D7E; line-height: 1.6;">为提升志愿者伙伴的留存和积极性，我设计了这套积分系统界面。每一分努力都值得被看见和庆祝。</p>
-      <p style="color: #7F8C8D; line-height: 1.6; font-size: 0.95em; font-family: Georgia, serif; font-style: italic;">Designed a points-based incentive UI to boost volunteer retention. Because every effort deserves to be celebrated.</p>
-      <a href="https://muqingsun16-svg.github.io/Points-based-incentives-demo/" target="_blank" style="display: inline-block; background: #A3E4D7; color: #0B5345; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; margin-top: 10px;">🔗 查看演示 / View Demo</a>
-    </div>
-
-    <div style="background: white; border-radius: 20px; padding: 25px; margin-top: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.07);">
-      <h3 style="color: #E67E22; margin-top: 0;">🧴 欧莱雅 Brandstorm · 可穿戴香氛饰品</h3>
-      <p style="color: #5D6D7E; line-height: 1.6;">年轻人渴望被看见、需要个性化表达。我们设计了可穿戴的香氛饰品，并为不同阶段用户创造专属趣味玩法推向市场。</p>
-      <p style="color: #7F8C8D; line-height: 1.6; font-size: 0.95em; font-family: Georgia, serif; font-style: italic;">Young people want to be seen and express individuality. We created wearable fragrance accessories and playful go-to-market journeys for diverse customers.</p>
-      <div style="background: #FDEBD0; border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center;">
-        <p style="color: #9A7D0A; margin: 0 0 10px; font-weight: bold;">📸 作品快照 / Project Snapshot</p>
-        <img src="https://via.placeholder.com/300x180/FDEBD0/9A7D0A?text=Brandstorm+Preview" alt="欧莱雅商赛作品截图" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-        <p style="font-size: 0.85em; color: #7D6608; margin-top: 8px;">（设计稿仅供展示，详细内容可访问个人网站）</p>
-      </div>
-    </div>
-
-    <div style="background: white; border-radius: 20px; padding: 25px; margin-top: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.07); border: 2px dashed #F5B7B1;">
-      <h3 style="color: #EC7063; margin-top: 0;">🆕 Offer捕手 <span style="background: #FADBD8; color: #943126; padding: 2px 10px; border-radius: 10px; font-size: 0.75em;">🚧 正在火热制作中...</span></h3>
-      <p style="color: #5D6D7E; line-height: 1.6;">一个帮助大家捕捉理想机会的工具，正在努力孵化中，敬请期待！</p>
-      <p style="color: #7F8C8D; line-height: 1.6; font-size: 0.95em; font-family: Georgia, serif; font-style: italic;">A tool to help you catch dream offers. Under active development — stay tuned!</p>
-    </div>
-
-    <div style="background: white; border-radius: 20px; padding: 25px; margin-top: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.07);">
-      <h3 style="color: #5B2C6F; margin-top: 0;">📄 公开发表论文 / Publications</h3>
-      <ul style="color: #5D6D7E; line-height: 1.8; padding-left: 20px;">
-        <li>论文1：<a href="#" style="color: #8E44AD;">[标题占位]</a> （替换为DOI链接）</li>
-        <li>论文2：<a href="#" style="color: #8E44AD;">[标题占位]</a> （替换为DOI链接）</li>
-      </ul>
+    <div class="edu-card bachelor">
+      <div class="edu-card-label">本科 · Bachelor</div>
+      <div class="edu-card-school">华南理工大学</div>
+      <div class="edu-card-major">会展经济与管理</div>
+      <div class="edu-card-en">Exhibition Economy &amp; Management · SCUT</div>
     </div>
   </div>
-
-  <!-- 底部卡片和主张 -->
-  <div style="max-width: 800px; margin: 50px auto 30px; padding: 0 20px; text-align: center;">
-    <h2 style="color: #5499C7; font-family: Georgia, serif; font-style: italic; font-size: 2em; margin-bottom: 15px;">My Little Creations</h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
-      <a href="https://yuanbao.tencent.com/sc/KhnwCTYBKPQopiU" target="_blank" style="background: #E8DAEF; padding: 15px 20px; border-radius: 12px; text-decoration: none; color: #6C3483; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">🎮 罕见病小游戏</a>
-      <a href="https://muqingsun16-svg.github.io/Points-based-incentives-demo/" target="_blank" style="background: #D4EFDF; padding: 15px 20px; border-radius: 12px; text-decoration: none; color: #196F3D; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">🤖 积分系统 UI</a>
-      <a href="#" style="background: #FDEBD0; padding: 15px 20px; border-radius: 12px; text-decoration: none; color: #9A7D0A; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">🧴 欧莱雅商赛</a>
-      <span style="background: #FADBD8; padding: 15px 20px; border-radius: 12px; color: #943126; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">🆕 Offer捕手 (soon)</span>
-    </div>
-  </div>
-
-  <div style="text-align: center; margin: 40px auto 20px; padding: 20px; background: rgba(255,255,255,0.6); border-radius: 15px; max-width: 700px;">
-    <p style="font-size: 1.3em; color: #34495E; font-style: italic; margin: 0;">“谢谢你的存在，这世上有人想清楚地看见你。”</p>
-    <p style="font-family: Georgia, serif; color: #7F8C8D; font-style: italic; margin-top: 8px;">Thank you for being here. Someone truly wants to see you clearly.</p>
-  </div>
-
 </div>
+
+<!-- EXPERIENCE -->
+<div class="section" style="padding-top: 0;">
+  <h2 class="section-title">💼 实习经历</h2>
+  <div class="exp-row">
+    <span class="pill pill-purple">广汽丰田 GAC Toyota</span>
+    <span class="pill pill-green">河南广播电视台 Henan TV</span>
+    <span class="pill pill-blue">上海人工智能实验室 Shanghai AI Lab</span>
+    <span class="pill pill-yellow">携程集团 Trip.com</span>
+  </div>
+  <p style="margin-top:14px; font-size:0.85rem; color:var(--text-light); text-align:right;">更多经历详见完整简历 / See full resume for details</p>
+</div>
+
+<!-- WORKS -->
+<div id="works" class="section" style="padding-top: 0;">
+  <h2 class="section-title">✨ 精选作品</h2>
+  <div class="works-grid">
+
+    <div class="work-card">
+      <div>
+        <span class="work-tag tag-game">互动游戏</span>
+        <h3 class="work-title">罕见病科普互动游戏</h3>
+        <p class="work-desc">我把冷知识藏进游戏，像悄悄递给你一张小纸条，等你打开时，会心一笑。</p>
+        <p class="work-desc-en">I hid knowledge inside a game, like a little note passed just to you.</p>
+      </div>
+      <a href="https://yuanbao.tencent.com/sc/KhnwCTYBKPQopiU" target="_blank" class="work-link" aria-label="来玩一下">🕹️</a>
+    </div>
+
+    <div class="work-card">
+      <div>
+        <span class="work-tag tag-design">系统设计</span>
+        <h3 class="work-title">内部志愿者积分激励系统 UI</h3>
+        <p class="work-desc">为提升志愿者伙伴的留存和积极性设计的积分系统界面。每一分努力都值得被看见。</p>
+        <p class="work-desc-en">Because every effort deserves to be celebrated.</p>
+      </div>
+      <a href="https://muqingsun16-svg.github.io/Points-based-incentives-demo/" target="_blank" class="work-link" aria-label="查看演示">🔗</a>
+    </div>
+
+    <div class="work-card">
+      <div>
+        <span class="work-tag tag-gtm">商业竞赛</span>
+        <h3 class="work-title">L'Oréal Brandstorm · 可穿戴香氛饰品</h3>
+        <p class="work-desc">年轻人渴望被看见、需要个性化表达。我们设计了可穿戴香氛饰品，并创造专属趣味玩法推向市场。</p>
+        <p class="work-desc-en">Wearable fragrance accessories with playful go-to-market journeys for diverse customers.</p>
+      </div>
+      <a href="https://muqingsun16-svg.github.io" target="_blank" class="work-link" aria-label="查看详情">🧴</a>
+    </div>
+
+    <div class="work-card" style="border-style: dashed;">
+      <div>
+        <span class="work-tag tag-soon">🚧 即将发布</span>
+        <h3 class="work-title">Offer 捕手</h3>
+        <p class="work-desc">一个帮助大家捕捉理想机会的工具，正在孵化中，敬请期待！</p>
+        <p class="work-desc-en">A tool to help you catch dream offers — under active development, stay tuned!</p>
+      </div>
+      <span class="work-link soon" aria-label="即将上线">🆕</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <p class="quote-text">"谢谢你的存在，这世上有人想清楚地看见你。"</p>
+  <p class="quote-en">Thank you for being here. Someone truly wants to see you clearly.</p>
+  <a href="https://muqingsun16-svg.github.io" target="_blank" class="btn btn-primary" style="margin-top: 32px;">
+    🌐 访问完整个人网站
+  </a>
+</div>
+
+<footer>
+  © Evelyn · Made with warmth &amp; intention · <a href="https://muqingsun16-svg.github.io" style="color: var(--purple);">muqingsun16-svg.github.io</a>
+</footer>
+
 </body>
 </html>
