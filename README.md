@@ -31,16 +31,16 @@
 ## ✨ Selected Works
 
 ### 🎮 罕见病科普互动游戏
-> 我把冷知识藏进游戏，像悄悄递给你一张小纸条，等你打开时，会心一笑。
-> *I hid knowledge inside a game, like a little note passed just to you.*
+> 罕见病知识因为“少见”和“专业壁垒”，大众认知度很低我试着把知识点藏进小游戏里，让大家在轻松的互动中，看见这些“罕见”的故事!  
+> *Rare diseases face low awareness due to complexity. I designed this interactive game to break barriers, turning medical knowledge into a warm journey of collecting stars.*
 
 [![Play Now](https://img.shields.io/badge/🕹️%20来玩一下-Play%20Now-AED6F1?style=for-the-badge)](https://yuanbao.tencent.com/sc/KhnwCTYBKPQopiU)
 
 ---
 
 ### 🤖 内部志愿者积分激励系统 UI
-> 为提升志愿者留存和积极性设计的积分系统界面，因为每一分努力都值得被看见。
-> *Because every effort deserves to be celebrated.*
+> 为了让志愿者伙伴们更有动力，我设计了这套积分系统界面。看见大家的热情被点燃，就是我最开心的事~
+> *Designed UI for a points system to boost volunteer retention and motivation. Everyone's effort matters!*
 
 [![View Demo](https://img.shields.io/badge/🔗%20查看演示-View%20Demo-A3E4D7?style=for-the-badge)](https://muqingsun16-svg.github.io/Points-based-incentives-demo/)
 
